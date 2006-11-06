@@ -1,0 +1,10 @@
+0.8.1 Add example data file for xppauto.plot(). Upload package to CRAN.
+0.8-0 Add xppauto.plot for plotting bifurcation diagrams from XPPAUT and
+      utility function dev2ps.
+0.7-0 Change trace.factor to group. Add option to create a "split plot" for the
+      bargraph function similar to the appearance of a back-to-back histogram.
+0.6-1 Fix bug with CI's in lineplot.CI.
+0.6-0 Modified CI to allow asymmetric functions. Changed handling of data 
+      environment.
+0.5-0 First release.
+
