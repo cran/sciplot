@@ -12,6 +12,7 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
     leg.lab=NULL, x.leg=NULL, y.leg=NULL, cex.leg=1,
     bty="n", bg="white", space=if(split) c(-1,1),
     err.width=if(length(levels(as.factor(x.factor)))>10) 0 else .1,
+    err.col="black", err.lty=1,
     fun = function(x) mean(x, na.rm=TRUE),
     ci.fun= function(x) c(fun(x)-se(x), fun(x)+se(x)),
     ylim=NULL, xpd=FALSE, data=NULL, subset=NULL, ...)
@@ -39,6 +40,8 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
           'none'.}
     \item{space}{set spacing for bars.}
     \item{err.width}{set width of whiskers for error bars.}
+    \item{err.col}{color for error bars. Defaults to "black".}
+    \item{err.lty}{line type for error bars.}
     \item{bg}{background color of legend.}
     \item{fun}{the function to compute the summary statistic.
           Should return a single real value.  Defaults to mean with NA

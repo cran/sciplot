@@ -12,6 +12,8 @@ lineplot.CI(x.factor, response, group=NULL, type="b",
     pch=c(16, 21, 15, 22, 17, 24, c(3:14)), 
     fun = function(x) mean(x, na.rm=TRUE),
     ci.fun= function(x) c(fun(x)-se(x), fun(x)+se(x)),
+    err.width = if(length(levels(as.factor(x.factor))) > 10) 0 else 0.1,
+    err.col = col, err.lty = 1, 
     xlim=NULL, ylim=NULL, cex=NULL, lwd=NULL, col="black", cex.axis=1,
     xaxt="s", data=NULL, subset=NULL, ...)
 }
@@ -41,9 +43,12 @@ lineplot.CI(x.factor, response, group=NULL, type="b",
           vector of length 2 defining the lower and upper limits of the
           CI's.  Defaults to the mean +/- 1 standard error, with NA
           values removed.}
+    \item{err.width}{set width of whiskers for error bars.}
+    \item{err.col}{color for error bars. Defaults to col.}
+    \item{err.lty}{line type for error bars.}
     \item{xlim, ylim}{range for x and y axes.}
     \item{cex}{overall plot character expansion value.}
-    \item{lwd}{deterimined line width.}
+    \item{lwd}{deterimines line width.}
     \item{col}{default color(s) for plot.}
     \item{cex.axis}{character expansion value for axis labels.}
     \item{xaxt}{should x-axis be drawn?}

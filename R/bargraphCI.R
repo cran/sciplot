@@ -1,4 +1,3 @@
-# Function begins here
 bargraph.CI <-
   function(x.factor, response, group = NULL, split = FALSE,
            col = NULL, angle = NULL, density = NULL,
@@ -6,6 +5,7 @@ bargraph.CI <-
            leg.lab = NULL, x.leg = NULL, y.leg = NULL, cex.leg = 1,
            bty = "n", bg = "white", space=if(split) c(-1,1),
            err.width=if(length(levels(as.factor(x.factor)))>10) 0 else .1,
+           err.col = "black", err.lty = 1,
            fun = function(x) mean(x, na.rm = TRUE),
            ci.fun = function(x) c(fun(x)-se(x), fun(x)+se(x)),
            ylim = NULL, xpd = FALSE, data = NULL, subset = NULL, ...) {
@@ -88,7 +88,8 @@ bargraph.CI <-
       for(i in 1:nlevels.y)
         arrows(xvals[,i], if(lc) CI.L[,i] else mn.data[,i],
                xvals[,i], if(uc) CI.H[,i] else mn.data[,i],
-               angle=90, length=err.width, code = 3)
+               angle=90, code = 3, col=err.col, lty=err.lty,
+               length=err.width)
     }
 
     # Draw legend

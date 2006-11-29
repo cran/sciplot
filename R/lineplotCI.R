@@ -1,13 +1,14 @@
-# Function begins here
-lineplot.CI <- function(x.factor, response, group = NULL, type = "b",
-                        legend = TRUE, trace.label = NULL, leg.lab = NULL,
-                        fixed = FALSE, x.leg = NULL, y.leg = NULL, cex.leg = 1,
-                        ncol = 1, pch = c(16,21,15,22,17,24, c(3:14)),
-                        fun = function(x) mean(x, na.rm=TRUE),
-                        ci.fun = function(x) c(fun(x)-se(x), fun(x)+se(x)),
-                        xlim = NULL, ylim = NULL, cex = NULL, lwd = NULL,
-                        col = "black", cex.axis = 1, xaxt = "s", data = NULL,
-                        subset = NULL, ...) {
+lineplot.CI <-
+  function(x.factor, response, group = NULL, type = "b", legend = TRUE,
+           trace.label = NULL, leg.lab = NULL, fixed = FALSE, x.leg = NULL,
+           y.leg = NULL, cex.leg = 1, ncol = 1,
+           pch = c(16,21,15,22,17,24, c(3:14)),
+           fun = function(x) mean(x, na.rm=TRUE),
+           ci.fun = function(x) c(fun(x)-se(x), fun(x)+se(x)),
+           err.width = if(length(levels(as.factor(x.factor)))>10) 0 else .1,
+           err.col = col, err.lty = 1, xlim = NULL, ylim = NULL,
+           cex = NULL, lwd = NULL, col = "black", cex.axis = 1,
+           xaxt = "s", data = NULL, subset = NULL, ...) {
   # Set up environment
   subset <- eval(substitute(subset), envir=data)
 
@@ -164,13 +165,16 @@ lineplot.CI <- function(x.factor, response, group = NULL, type = "b",
   nlevels.x <- dim(mn.data)[1]
   if(is.null(group))
     arrows(seq(1:nlevels.x), CI.L, seq(1:nlevels.x), CI.H, angle = 90,
-           col = col, length = 0.1, code = 3, lwd = lwd)
+           col = err.col, length = err.width, code = 3, lwd = lwd,
+           lty=err.lty)
   else {
     nlevels.y <- dim(mn.data)[2]
     for(i in 1:nlevels.y)
       arrows(seq(1:nlevels.x), CI.L[,i], seq(1:nlevels.x),
-             CI.H[,i], angle=90, col=if(length(col)>1) col[i] else col,
-             length=.1, code=3,lwd=lwd)
+             CI.H[,i], angle=90, length=err.width,
+             col=if(length(err.col)>1) err.col[i] else err.col,
+             lty=if(length(err.lty)>1) err.lty[i] else err.lty,
+             code=3,lwd=lwd)
   }
 
   # Draw points (Note: adding points at this point allows points to be in
