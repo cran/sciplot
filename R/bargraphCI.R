@@ -1,3 +1,5 @@
+
+
 bargraph.CI <-
   function(x.factor, response, group = NULL, split = FALSE,
            col = NULL, angle = NULL, density = NULL,

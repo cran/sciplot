@@ -6,7 +6,7 @@
     of a response variable for one-way or higher experimental designs.
 }
 \usage{
-lineplot.CI(x.factor, response, group=NULL, type="b",
+lineplot.CI(x.factor, response, group=NULL, type="b", x.cont=FALSE,
     legend=TRUE, trace.label=NULL, leg.lab=NULL, fixed=FALSE, x.leg=NULL,
     y.leg=NULL, cex.leg=1, ncol=1, 
     pch=c(16, 21, 15, 22, 17, 24, c(3:14)), 
@@ -25,6 +25,7 @@ lineplot.CI(x.factor, response, group=NULL, type="b",
         the traces.}
     \item{type}{the type of plot: lines, points, or both. Defaults to
           both.}
+    \item{x.cont}{logical.  Treat x.factor as a continuous variable.}
     \item{legend}{logical.  Should a legend be included?}
     \item{trace.label}{overall legend label.}
     \item{leg.lab}{legend labels for trace factors.}
@@ -70,7 +71,7 @@ lineplot.CI(x.factor, response, group=NULL, type="b",
     higher designs.
 }
 \seealso{
-    \code{\link{interaction.plot}, \link{se}}
+    \code{interaction.plot, \link{se}}
 }
 \examples{
 data(ToothGrowth)

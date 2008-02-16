@@ -14,7 +14,7 @@ se(x, na.rm=TRUE)
   \item{na.rm}{logical. Should missing values be removed?}
 }
 \seealso{
-  \code{\link{sd}}
+  \code{sd}
 }
 \examples{se(1:10) ^ 2}
 \keyword{univar}

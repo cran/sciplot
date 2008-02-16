@@ -70,7 +70,7 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
     the first.
 }
 \seealso{
-    \code{\link{barplot}, \link{se}}
+    \code{barplot, \link{se}}
 }
 \examples{
 data(ToothGrowth)

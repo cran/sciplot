@@ -1,7 +1,7 @@
 lineplot.CI <-
-  function(x.factor, response, group = NULL, type = "b", legend = TRUE,
-           trace.label = NULL, leg.lab = NULL, fixed = FALSE, x.leg = NULL,
-           y.leg = NULL, cex.leg = 1, ncol = 1,
+  function(x.factor, response, group = NULL, type = "b", x.cont=FALSE,
+           legend = TRUE, trace.label = NULL, leg.lab = NULL,
+           fixed = FALSE, x.leg = NULL, y.leg = NULL, cex.leg = 1, ncol = 1,
            pch = c(16,21,15,22,17,24, c(3:14)),
            fun = function(x) mean(x, na.rm=TRUE),
            ci.fun = function(x) c(fun(x)-se(x), fun(x)+se(x)),
@@ -41,7 +41,7 @@ lineplot.CI <-
     cells <- tapply(response, list(x.factor, group), fun)
     nr <- nrow(cells)
     nc <- ncol(cells)
-    xvals <- 1:nr
+    xvals <- if(x.cont) as.numeric(levels(as.factor(x.factor))) else 1:nr
     if (is.ordered(x.factor)) {
       wn <- getOption("warn")
       options(warn = -1)
@@ -101,9 +101,9 @@ lineplot.CI <-
 
     return.data<-if(legend)
       list(pch=pch,ord=ord,xleg=xleg,yleg=yleg,ylabs=ylabs,lty=lty,
-           leg.bty=leg.bty,leg.bg=leg.bg,ord=ord)
-    else list(pch=pch,ord=ord)
-    return(return.data)
+           leg.bty=leg.bty,leg.bg=leg.bg,ord=ord,xvals=xvals,cells=cells)
+    else list(pch=pch,ord=ord,xvals=xvals)
+       return(return.data)
   }
   #////////////////////////////////////////////////////////////////////#
   #                         End Section                                #
@@ -121,71 +121,77 @@ lineplot.CI <-
 
   # Calculate mean and SE's
   mn.data <- tapply(response, groups, fun)
-  CI.data <-
-    array(unlist(tapply(response, groups, ci.fun)),
-          c(2,
-            length(levels(as.factor(x.factor))),
-            if(is.null(group)) 1
-            else length(levels(as.factor(group)))))
-  CI.L <- CI.data[1,,]
-  CI.H <- CI.data[2,,]
-  
-  # Replace undefined SE with zero. Note that this will return the warning
-  # message: "zero-length arrow is of indeterminate angle and so skipped"
-  replace.NA <- function(x) if(is.na(x)) 0 else x
-  
-  if(!is.null(group)) {
-    CI.L <- apply(CI.L, c(1,2), replace.NA)
-    CI.H <- apply(CI.H, c(1,2), replace.NA)
-  }
-  else {
-    CI.L <- as.vector(unlist(lapply(CI.L, replace.NA)))
-    CI.H <- as.vector(unlist(lapply(CI.H, replace.NA)))
-  }
-  
+  CI.data <- tapply(response, groups, ci.fun)
   # Determine y-axis plot region
-  plot.limits = c(min(CI.L), max(CI.H))
+  plot.limits = c(
+    min(c(unlist(mn.data), unlist(CI.data)), na.rm=TRUE),
+    max(c(unlist(mn.data), unlist(CI.data)), na.rm=TRUE))
 
   # Draw lines
   if(is.null(group)) {
-    plot(mn.data, xaxt="n", type=type, col=col, pch=NA, cex=cex,
+    nlevels.x <-
+      if(x.cont) as.numeric(levels(as.factor(x.factor)))
+      else 1:nrow(mn.data)
+    plot(nlevels.x, mn.data, xaxt="n", type=type, col=col, pch=NA, cex=cex,
          cex.axis=cex.axis,
-         xlim=if(is.null(xlim)) c(.8,length(mn.data)+.2) else xlim,
+         xlim=if(is.null(xlim)) {
+           c(min(nlevels.x)-.2,max(nlevels.x)+.2)
+         }
+         else xlim,
          ylim=if(is.null(ylim)) plot.limits else ylim, ...)
     if(xaxt!="n") axis(1,label=names(mn.data),
-         at=c(1:length(names(mn.data))), cex.axis=cex.axis)
+         at=nlevels.x, cex.axis=cex.axis)
   }
   else leg.vals <-
     int.plot(x.factor, group, response, type = type,
              xlim = xlim, ylim = if(is.null(ylim)) plot.limits else ylim,
              cex.axis = cex.axis, trace.label = trace.label, pch = NA,
              legend = legend, ...)
-
   # Draw CI's
-  nlevels.x <- dim(mn.data)[1]
-  if(is.null(group))
-    arrows(seq(1:nlevels.x), CI.L, seq(1:nlevels.x), CI.H, angle = 90,
-           col = err.col, length = err.width, code = 3, lwd = lwd,
-           lty=err.lty)
+  if(is.null(group)) {
+    nlevels.x <-
+      if(x.cont) as.numeric(levels(as.factor(x.factor)))
+      else 1:nrow(mn.data)
+    CI.seln <- !is.na(mn.data)
+    CI.plot <- matrix(unlist(CI.data[CI.seln]),
+                      nrow=sum(CI.seln), byrow=TRUE)
+    arrows(nlevels.x[CI.seln],
+           CI.plot[,1],
+           nlevels.x[CI.seln],
+           CI.plot[,2],
+           angle = 90, col = err.col, length = err.width, code = 3,
+           lwd = lwd, lty=err.lty)
+  }
   else {
-    nlevels.y <- dim(mn.data)[2]
-    for(i in 1:nlevels.y)
-      arrows(seq(1:nlevels.x), CI.L[,i], seq(1:nlevels.x),
-             CI.H[,i], angle=90, length=err.width,
+    nlevels.y <- ncol(mn.data)
+    for(i in 1:nlevels.y) {
+      CI.seln <- !is.na(mn.data)[,i]
+      CI.plot <- matrix(unlist(CI.data[CI.seln,i]),
+                        nrow=sum(CI.seln), byrow=TRUE)
+      arrows(leg.vals$xvals[CI.seln],
+             CI.plot[,1],
+             leg.vals$xvals[CI.seln],
+             CI.plot[,2],
+             angle=90, length=err.width,
              col=if(length(err.col)>1) err.col[i] else err.col,
              lty=if(length(err.lty)>1) err.lty[i] else err.lty,
              code=3,lwd=lwd)
+    }
   }
 
   # Draw points (Note: adding points at this point allows points to be in
   # the foreground)
   if(type %in% c("p", "b")) {
-    if(is.null(group))
-      points(mn.data,pch=pch[1],bg="white",cex=cex,col=col)
+    if(is.null(group)) {
+      nlevels.x <-
+        if(x.cont) as.numeric(levels(as.factor(x.factor)))
+        else 1:nrow(mn.data)
+      points(nlevels.x, mn.data,pch=pch[1],bg="white",cex=cex,col=col)
+    }
     else {
       nlevels.y<-dim(mn.data)[2]
       for(i in 1:nlevels.y)
-        points(mn.data[,i],pch=pch[i],bg="white",
+        points(leg.vals$xvals, mn.data[,i],pch=pch[i],bg="white",
                col=if(length(col)>1) col[i] else col,cex=cex)
     }
   }

@@ -1,3 +1,8 @@
+1.0-1 Fix for unbalanced designs.
+1.0-0 Add ability to plot data with non-overlapping x-axis factors in
+      lineplot.CI.
+0.9-0 Remove functions (xppauto.plot, dev2ps) not associated with factorial
+      graphs to package separately.
 0.8-2 Add options for specifiying width, color and linetype of error bars.
 0.8-1 Add example data file for xppauto.plot(). Upload package to CRAN.
 0.8-0 Add xppauto.plot for plotting bifurcation diagrams from XPPAUT and
