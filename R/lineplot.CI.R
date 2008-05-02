@@ -140,7 +140,7 @@ lineplot.CI <-
          else xlim,
          ylim=if(is.null(ylim)) plot.limits else ylim, ...)
     if(xaxt!="n") axis(1,label=names(mn.data),
-         at=nlevels.x, cex.axis=cex.axis)
+         at=nlevels.x, cex.axis=cex.axis, ...)
   }
   else leg.vals <-
     int.plot(x.factor, group, response, type = type,

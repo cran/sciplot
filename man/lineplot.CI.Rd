@@ -25,7 +25,7 @@ lineplot.CI(x.factor, response, group=NULL, type="b", x.cont=FALSE,
         the traces.}
     \item{type}{the type of plot: lines, points, or both. Defaults to
           both.}
-    \item{x.cont}{logical.  Treat x.factor as a continuous variable.}
+    \item{x.cont}{logical.  Treat x.factor as a continuous variable?}
     \item{legend}{logical.  Should a legend be included?}
     \item{trace.label}{overall legend label.}
     \item{leg.lab}{legend labels for trace factors.}
@@ -71,7 +71,7 @@ lineplot.CI(x.factor, response, group=NULL, type="b", x.cont=FALSE,
     higher designs.
 }
 \seealso{
-    \code{interaction.plot, \link{se}}
+    \code{interaction.plot}, \code{\link{se}}
 }
 \examples{
 data(ToothGrowth)

@@ -1,3 +1,4 @@
+1.0-2 Fix to enable "las" parameter in lineplot.CI
 1.0-1 Fix for unbalanced designs.
 1.0-0 Add ability to plot data with non-overlapping x-axis factors in
       lineplot.CI.

@@ -51,7 +51,7 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
           CI's.  Defaults to the mean +/- 1 standard error, with NA
           values removed.}
     \item{ylim}{range of y axis.}
-    \item{xpd}{defualts to xpd=FALSE (in contrast to \code{\link{barplot}})
+    \item{xpd}{defualts to xpd=FALSE (in contrast to \code{barplot})
           to cut off the range of data plotted.}
     \item{data}{an optional data frame.}
     \item{subset}{an optional expression indicating the subset of the
@@ -62,7 +62,7 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
 \details{
     Plots a response as a function of treatment (factor) combinations for
     one-way and higher designs.  This is a "wrapper" function for barplot
-    that adds confidence intervals - barplot() should be consulted for
+    that adds confidence intervals - \code{barplot} should be consulted for
     details. Note that the option "beside=TRUE" from barplot is
     hardcoded and that the default for value xpd is FALSE. If the option
     split is specified, the response associated with the second
@@ -70,7 +70,7 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
     the first.
 }
 \seealso{
-    \code{barplot, \link{se}}
+    \code{barplot}, \code{\link{se}}
 }
 \examples{
 data(ToothGrowth)
