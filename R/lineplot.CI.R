@@ -204,7 +204,7 @@ lineplot.CI <-
     legend(x=if(is.null(x.leg)) leg.vals$xleg else x.leg,
            y=if(is.null(y.leg)) leg.vals$yleg else y.leg,
            legend = if(!is.null(leg.lab)) leg.lab else {
-             if(fixed) leg.vals$ylabs[leg.vals$ord] else leg.vals$ylabs
+             if(fixed) levels(as.factor(unlist(group))) else leg.vals$ylabs
            },
            pch = if(type %in% c("p", "b") & !fixed) pch[leg.vals$ord] else pch,
            col = if(type %in% c("p", "b") & length(col)>1 & !fixed)
