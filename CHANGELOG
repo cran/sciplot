@@ -1,3 +1,4 @@
+1.0-4 Remove period from GPL license
 1.0-3 Fix for labeling legend with "fixed=TRUE" option
 1.0-2 Fix to enable "las" parameter in lineplot.CI
 1.0-1 Fix for unbalanced designs.
