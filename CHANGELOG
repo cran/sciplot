@@ -1,3 +1,4 @@
+1.0-6 Fix for legend code with fixed=TRUE in lineplot.CI
 1.0-5 Fix for incomplete factorial designs in bargraph.CI
 1.0-4 Remove period from GPL license
 1.0-3 Fix for labeling legend with "fixed=TRUE" option

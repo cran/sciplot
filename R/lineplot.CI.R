@@ -200,17 +200,24 @@ lineplot.CI <-
   # Below modified from the interaction.plot function in stats package #
   #////////////////////////////////////////////////////////////////////#
 
-  if(legend & !is.null(group)) {
+    if(legend & !is.null(group)) {
     legend(x=if(is.null(x.leg)) leg.vals$xleg else x.leg,
            y=if(is.null(y.leg)) leg.vals$yleg else y.leg,
            legend = if(!is.null(leg.lab)) leg.lab else {
              if(fixed) levels(as.factor(unlist(group))) else leg.vals$ylabs
            },
-           pch = if(type %in% c("p", "b") & !fixed) pch[leg.vals$ord] else pch,
-           col = if(type %in% c("p", "b") & length(col)>1 & !fixed)
-           col[leg.vals$ord] else col,
-           lty = if (type %in% c("l", "b") & fixed) leg.vals$lty[leg.vals$ord]
-           else leg.vals$lty,
+           pch = if(type %in% c("p", "b")) {
+             if(!fixed) pch[leg.vals$ord]
+             else pch
+             },
+           col = if(type %in% c("p", "b")) {
+             if(!fixed  & length(col)>1) col[leg.vals$ord]
+             else col
+             },
+           lty = if (type %in% c("l", "b")) {
+             if(fixed) leg.vals$lty[order(leg.vals$ord)]
+             else leg.vals$lty
+             },
            ncol=ncol, bty = leg.vals$leg.bty, bg = leg.vals$leg.bg,
            cex=cex.leg)
   }
