@@ -78,7 +78,7 @@ bargraph.CI <-
     }
 
     # Determine y-axis plot region
-    if(is.null(ylim)) ylim <- c(min(0, CI.L), max(CI.H))
+    if(is.null(ylim)) ylim <- c(min(0, CI.L), max(0, CI.H))
 
     # Plot
     xvals <- barplot(mn.data, ylim=ylim, beside = TRUE, col = col,
