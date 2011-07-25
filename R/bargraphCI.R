@@ -44,7 +44,7 @@ bargraph.CI <-
     if(is.null(group)) groups = x.factor else {
       # If more than 1 "y-factor", combine for plotting
       if(length(group[[1]]) > 1) {
-        group <- do.call("paste",c(group,sep="."))
+        group <- interaction(group)
       }
       # "groups" defines the combination of "x.factor" and "group"
       groups <- list(group,x.factor)

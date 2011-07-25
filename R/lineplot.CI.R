@@ -11,7 +11,7 @@ lineplot.CI <-
            xaxt = "s", data = NULL, subset = NULL, ...) {
   # Set up environment
   subset <- eval(substitute(subset), envir=data)
-
+  fun <- eval(substitute(fun), envir=data)
   if(!is.null(data)) {
     if(!is.null(subset)) data <- subset(data,subset)
     x.factor <- eval(substitute(x.factor), envir=data)
@@ -114,7 +114,7 @@ lineplot.CI <-
   if(is.null(group)) groups = x.factor else {   
     # If more than 1 "y-factor", combine for plotting
     if(length(group[[1]]) > 1)
-      group <- do.call("paste", c(group, sep = "."))
+      group <- interaction(group)
     # "groups" defines the combination of "x.factor" and "group"
     groups <- list(x.factor, group)
   }

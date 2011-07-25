@@ -1,3 +1,4 @@
+1.0-8 Fix to honor factor levels with more than one froup factor
 1.0-7 Fix to default ylim when all negative values in bargraph.CI
 1.0-6 Fix for legend code with fixed=TRUE in lineplot.CI
 1.0-5 Fix for incomplete factorial designs in bargraph.CI
