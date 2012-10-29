@@ -111,10 +111,10 @@ lineplot.CI <-
 
   # Figure out if we're dealing with 1 or more total groups (i.e., we always
   # have 1 "x.factor" and we may have 1 or more "group".
-  if(is.null(group)) groups = x.factor else {   
+  if(is.null(group)) groups = factor(x.factor) else {   
     # If more than 1 "y-factor", combine for plotting
     if(length(group[[1]]) > 1)
-      group <- interaction(group)
+      group <- factor(interaction(group, lex.order=TRUE))
     # "groups" defines the combination of "x.factor" and "group"
     groups <- list(x.factor, group)
   }
