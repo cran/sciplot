@@ -47,6 +47,7 @@ bargraph.CI <-
         group <- factor(interaction(group, lex.order=TRUE))
       }
       # "groups" defines the combination of "x.factor" and "group"
+      group <- factor(group) # Do this to drop unused levels
       groups <- list(group,x.factor)
     }
 

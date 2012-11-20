@@ -1,3 +1,5 @@
+1.1-0 Fix to remove unused levels from group factors. Fix to change
+      lwd in lineplot.CI when no group factors are specified.
 1.0-9 Fix to remove unused levels from factors. Change default
       ordering of factor levels in legend when more than one group factor. 
 1.0-8 Fix to honor factor levels with more than one group factor

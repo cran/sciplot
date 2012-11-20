@@ -116,6 +116,7 @@ lineplot.CI <-
     if(length(group[[1]]) > 1)
       group <- factor(interaction(group, lex.order=TRUE))
     # "groups" defines the combination of "x.factor" and "group"
+    group <- factor(group) # Do this to drop unused levels
     groups <- list(x.factor, group)
   }
 
@@ -133,13 +134,13 @@ lineplot.CI <-
       if(x.cont) as.numeric(levels(as.factor(x.factor)))
       else 1:nrow(mn.data)
     plot(nlevels.x, mn.data, xaxt="n", type=type, col=col, pch=NA, cex=cex,
-         cex.axis=cex.axis,
+         cex.axis=cex.axis, lwd=lwd,
          xlim=if(is.null(xlim)) {
            c(min(nlevels.x)-.2,max(nlevels.x)+.2)
          }
          else xlim,
          ylim=if(is.null(ylim)) plot.limits else ylim, ...)
-    if(xaxt!="n") axis(1,label=names(mn.data),
+    if(xaxt!="n") axis(1,labels=names(mn.data),
          at=nlevels.x, cex.axis=cex.axis, ...)
   }
   else leg.vals <-
