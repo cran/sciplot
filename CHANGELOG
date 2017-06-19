@@ -1,7 +1,9 @@
+1.1-1 Fix to honor subset argument when data option is not specified and
+      added details to NAMESPACE file
 1.1-0 Fix to remove unused levels from group factors. Fix to change
       lwd in lineplot.CI when no group factors are specified.
 1.0-9 Fix to remove unused levels from factors. Change default
-      ordering of factor levels in legend when more than one group factor. 
+      ordering of factor levels in legend when more than one group factor.
 1.0-8 Fix to honor factor levels with more than one group factor
 1.0-7 Fix to default ylim when all negative values in bargraph.CI
 1.0-6 Fix for legend code with fixed=TRUE in lineplot.CI
@@ -21,7 +23,6 @@
 0.7-0 Change trace.factor to group. Add option to create a "split plot" for the
       bargraph function similar to the appearance of a back-to-back histogram.
 0.6-1 Fix bug with CI's in lineplot.CI().
-0.6-0 Modified CI to allow asymmetric functions. Changed handling of data 
+0.6-0 Modified CI to allow asymmetric functions. Changed handling of data
       environment.
 0.5-0 First release.
-

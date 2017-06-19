@@ -19,6 +19,14 @@ lineplot.CI <-
     group <- eval(substitute(group), envir=data)
   }
 
+  if(is.null(data)) {
+      if(!is.null(subset)) {
+          x.factor <- x.factor[subset]
+          response <- response[subset]
+          group <- group[subset]
+      }
+  }
+
   subset = NULL
   
   #////////////////////////////////////////////////////////////////////#
