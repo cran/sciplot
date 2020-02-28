@@ -1,3 +1,6 @@
+1.2-0 Fix for for default axes labels. Remove option trace.label from
+      lineplot.CI. TODO: Subset fix in 1.1-1 does not work using with()
+      unless $ is used for the subset variable.
 1.1-1 Fix to honor subset argument when data option is not specified and
       added details to NAMESPACE file
 1.1-0 Fix to remove unused levels from group factors. Fix to change

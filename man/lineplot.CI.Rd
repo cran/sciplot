@@ -6,9 +6,9 @@
     of a response variable for one-way or higher experimental designs.
 }
 \usage{
-lineplot.CI(x.factor, response, group=NULL, type="b", x.cont=FALSE,
-    legend=TRUE, trace.label=NULL, leg.lab=NULL, fixed=FALSE, x.leg=NULL,
-    y.leg=NULL, cex.leg=1, ncol=1, 
+lineplot.CI(x.factor, response, group=NULL, type="b", xlab=NULL, ylab=NULL,
+    x.cont=FALSE, legend=TRUE, leg.lab=NULL, fixed=FALSE,
+    x.leg=NULL, y.leg=NULL, cex.leg=1, ncol=1,
     pch=c(16, 21, 15, 22, 17, 24, c(3:14)), 
     fun = function(x) mean(x, na.rm=TRUE),
     ci.fun= function(x) c(fun(x)-se(x), fun(x)+se(x)),
@@ -25,9 +25,12 @@ lineplot.CI(x.factor, response, group=NULL, type="b", x.cont=FALSE,
         the traces.}
     \item{type}{the type of plot: lines, points, or both. Defaults to
           both.}
+    \item{xlab}{default x-axis label. If not specified will parse name from
+          x.factor. To leave blank set to NA}
+    \item{ylab}{default y-axis label. If not specified will parse name from
+          response. To leave blank set to NA}
     \item{x.cont}{logical.  Treat x.factor as a continuous variable?}
     \item{legend}{logical.  Should a legend be included?}
-    \item{trace.label}{overall legend label.}
     \item{leg.lab}{legend labels for trace factors.}
     \item{fixed}{logical.  Should the legend be in the order of the
           levels of 'trace.factor' or in the order of the traces at

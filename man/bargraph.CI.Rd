@@ -7,7 +7,7 @@
 }
 \usage{
 bargraph.CI(x.factor, response, group=NULL, split=FALSE,
-    col=NULL, angle=NULL, density=NULL,
+    xlab=NULL, ylab=NULL, col=NULL, angle=NULL, density=NULL,
     lc=TRUE, uc=TRUE, legend=FALSE, ncol=1,
     leg.lab=NULL, x.leg=NULL, y.leg=NULL, cex.leg=1,
     bty="n", bg="white", space=if(split) c(-1,1),
@@ -26,6 +26,10 @@ bargraph.CI(x.factor, response, group=NULL, split=FALSE,
           groups of bars for each level of x.factor.}
     \item{split}{logical.  Should groups of bars be displayed back to back.
           See details below.}
+    \item{xlab}{default x-axis label. If not specified will parse name from
+          x.factor. To leave blank set to NA}
+    \item{ylab}{default y-axis label. If not specified will parse name from
+          response. To leave blank set to NA}
     \item{col}{default color(s) for bars.}
     \item{angle}{default angle of shading lines.}
     \item{density}{default density of shading lines.}
